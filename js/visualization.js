@@ -496,8 +496,8 @@
             
             d3.select(this).transition()
                   .duration('50')
-                  .style("opacity",1)
-                  .style("fill","grey")
+                  .style("opacity",.85)
+                  .style("fill","black")
                   .attr('height', yScale.bandwidth()/1.5);
             d3.select("svg")
                   .append("g")                  
