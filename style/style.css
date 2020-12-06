@@ -91,11 +91,6 @@ rect {
   
 }
 
-/* #piechart {
-  fill:white;
-  opacity: 0.8;
-} */
-
 div.tooltip {	
   z-index: 9999;
   position: absolute;			
@@ -188,11 +183,11 @@ button:hover {
 #piechart{
   position: relative;
   top: -325px;
-  left: 835px;
+  left: 805px;
   background-color:"#666666"; 
 }
 
 .vl {
   border-left: 6px solid #484646;
-  height: 405px;
+  height: 410px;
 }
