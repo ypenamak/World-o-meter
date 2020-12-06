@@ -435,6 +435,7 @@
           
           g.selectAll('rect').data(data)
               .enter().append('rect')
+                .attr('class', 'barrect')
                 .attr('y', d => yScale(yValue(d)))
                 .attr('width', d => xScale(xValue(0)))
                 .attr('height', yScale.bandwidth()/1.5)
@@ -630,6 +631,7 @@
             
           g.selectAll('rect').data(data)
             .enter().append('rect')
+              .attr('class', 'barrect')
               .attr('y', d => yScale(yValue(d)))
               .attr('width', d => xScale(xValue(0)))
               .attr('height', yScale.bandwidth()/1.5)
