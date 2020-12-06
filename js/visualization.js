@@ -135,8 +135,8 @@
   let countriesIncContinent = {};
 
   svg.call(tip);
-  d3.json("data/world.json").then((world, err) => {
-    d3.csv("data/factbook.csv").then((facts, err) => {
+  d3.json("./data/world.json").then((world, err) => {
+    d3.csv("./data/factbook.csv").then((facts, err) => {
       // const topics = Object.keys(facts[0]);
       //console.log(continent + topic);
       setYAxisLabelDropdown();
