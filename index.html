@@ -15,16 +15,34 @@
   <!-- Main page content -->
   <body> 
     <div class="hbar">
-      <h1> World Factbook - 2005
-        <form style="float:right">
+
+     <h1> World Factbook - 2005
+        <!-- <form style="float:right">
           <button type="submit" formaction="about.html">Design Document</button>
           <button type="submit" formaction="demo.html"> Demonstration Video </button>
         </form>
-      </h1>
+      </h1> -->
+
+    <!-- <h1> World Factbook - 2005 -->
+      <!-- <form style="float:right">
+      <button type="submit" formaction=" ##### "> Document</button>
+      <button type="submit" formaction=" ######"> Demonstration Video </button>
+      </form> -->
+
+      <div style="float: right;">
+      <form>
+        <input class="tabbutton" type="button" value="About" onclick="window.location.href='about.html'" />
+
+        <input class="tabbutton" type="button" value="Video" onclick="window.location.href='demo.html'" /> 
+      </form>
+    </div>
+
+    </h1>
+
     </div>   
-    <div class="top-container">      
+    <div class="top-container" style="font-family: Arial">      
       <div class="world-map">
-        <div class="selectors" style="color:white">
+        <div class="selectors" style="color: black" >
           <button onClick="window.location.reload()" class="ResetButton">Reset</button>
           <label>Continents</label>
           <select id="continent-selector" class="continent-selector"></select>
@@ -38,8 +56,9 @@
         </div> 
       </div>
 
-      <div class="bubblechart" style="background-color:#6666">
-        <div class="mappings-dropdown">
+
+    <div class="bubblechart" style="background-color:white">
+          <div class="mappings-dropdown">
               <label>Y Axis</label>
               <select id="mapping-selector" class="mapping-selector"></select>
         </div>
@@ -57,23 +76,23 @@
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
-         var data = google.visualization.arrayToDataTable([
+          var data = google.visualization.arrayToDataTable([
           ['Country', 'Value'],
-          ['United Kingdom', 4710000000000],
-          ['United States', 1400000000000],
-          ['Italy', 913900000000],
-          ['Spain', 771100000000],
-          ['Canada', 570000000000],
+          ['United Kingdom', 4710 ],
+          ['United States', 1400],
+          ['Italy', 913.9],
+          ['Spain', 771.10],
+          ['Canada', 570],
           //['Hong Kong', 417600000000],
-          ['Australia', 308700000000],
+          //['Australia', 308700000000],
           //['Portugal', 274700000000],
-          ['China', 233300000000],
+          ['China', 233.3],
           //['Brazil', 219800000000],
           //['Russia', 169600000000],
         ]);
 
       // Optional; add a title and set the width and height of the chart
-      var options = {'title':'Debt by Countries', 'width':580, 'height':300};
+      var options = {'title':'Debt by Countries'+ ' In Billions(M)', 'width':580, 'height':300};
 
       // Display the chart inside the <div> element with id="piechart"
       var chart = new google.visualization.PieChart(document.getElementById('piechart'));

@@ -12,8 +12,9 @@
   // Adding a Drop-down for the Y-axis to access Bubble Chart
   const fieldsMapping = {
     'Population': ['Area(sq km)'],
-    'GDP - per capita': ['Life expectancy at birth(years)'],
+    'GDP - per capita': ['Investment (gross fixed)(% of GDP)'],
     'Unemployment rate(%)': ['Labor force'],
+    'Oil - consumption(bbl/day)' : ['Oil - production(bbl/day)'],
     'Electricity - production(kWh)': ['Electricity - consumption(kWh)']
   }
   const defaultTopics = [
@@ -50,6 +51,24 @@
         .range(d3.schemeYlGn[9]),
       densities: ["0%", "1%", "5%", "10%", "15%", "20%", "50%", ">50%"],
     },
+    
+    {
+      topic: "Oil - consumption(bbl/day)",
+      colorFn: d3
+        .scaleThreshold()
+        .domain([
+          0,
+          20,
+          10000,
+          50000,
+          500000,
+          1183000,
+          19650000,
+        ])
+        .range(d3.schemePuRd[8]),
+      densities: ["0", "20", "10000", "50000", "500000", "1183000", "19650000"],
+    },
+
     {
       topic: "Electricity - production(kWh)",
       colorFn: d3
@@ -66,6 +85,8 @@
         .range(d3.schemeOranges[8]),
       densities: ["0", "0.1B", "10B", "50B", "100B", "1000B", ">1000B"],
     },
+
+   
   ];
 
 
@@ -101,7 +122,7 @@
     .append("svg")
     .attr("width", width)
     .attr("height", height)
-    .style("background", "#666666")
+    .style("background", "white")
     .append("g")
     .attr("class", "map");
 
@@ -214,7 +235,7 @@
           .append("text")
           .style("font-size",17)
           .style("font-weight", "bold")
-          .style("fill", "white")
+          .style("fill", "black")
           .attr("x", 20)
           .attr("y", 20)
           .text(topic);
@@ -261,8 +282,8 @@
                       parseFloat(d[topic]) <= ranges[1]
                     ) {
                       d3.select(this)
-                        .style("stroke", "white")
-                        .style("stroke-width", 2)
+                        .style("stroke", "#1a1a1a")
+                        .style("stroke-width", 1)
                         .style("opacity", 1);
                     }
                   }
@@ -272,8 +293,8 @@
                     parseFloat(d[topic]) <= ranges[1]
                   ) {
                     d3.select(this)
-                      .style("stroke", "white")
-                      .style("stroke-width", 2)
+                      .style("stroke", "#1a1a1a")
+                      .style("stroke-width", 1)
                       .style("opacity", 1);
                   }
                 }
@@ -326,6 +347,8 @@
               d["Unemployment rate(%)"] = countryInfo["Unemployment rate(%)"];
               d["Electricity - production(kWh)"] =
                 countryInfo["Electricity - production(kWh)"];
+              d["Oil - consumption(bbl/day)"] =
+                countryInfo["Oil - consumption(bbl/day)"];
             }
             return countryInfo ? topicColor(countryInfo[topic]) : "grey";
           })
@@ -358,7 +381,7 @@
       }
 
       //*********SVG1 - BarChart for Top 10 Highest Countries - Vandana**********
-      const widthhigh = 520;
+      const widthhigh = 550;
       const heighthigh = 200;
       //d3.select('svg1').remove();
       const svghigh = d3
@@ -366,7 +389,7 @@
             .append("svg")
             .attr("width", widthhigh)
             .attr("height", heighthigh)
-            .style("background", "#666666")
+            .style("background", "white")
             ;
       barcharthigh();
       //Barchart - Vandana
@@ -387,7 +410,7 @@
           const yValue = d => d.Country;
           //const xValue = d => d.Country;//'GDP - per capita'];
           //const yValue = d => d[topic];
-          const marginhigh = { top: 50, right: 40, bottom: 50, left: 100 };
+          const marginhigh = { top: 50, right: 30, bottom: 50, left: 130 };
           const innerWidthhigh = widthhigh - marginhigh.left - marginhigh.right;
           const innerHeighthigh = heighthigh - marginhigh.top - marginhigh.bottom;
           
@@ -429,7 +452,7 @@
               .attr('class', 'axis-label')
               .attr('y', 30)
               .attr('x', innerWidthhigh / 2)
-              .attr('fill', 'white')
+              .attr('fill', 'black')
               .text(xAxisLabelText);
             
           
@@ -452,7 +475,7 @@
               .attr('class', 'title')
               .attr('y', -10)
               .text(titleText)
-              .attr('fill', 'white');
+              .attr('fill', 'black');
 
           g.selectAll('rect')
                 .on('mouseover',mouseoverbarcharthigh)
@@ -463,7 +486,7 @@
             d3.select(this).transition()
                   .duration('50')
                   .style("opacity", ".85")
-                  .style("fill","red")
+                  .style("fill","#a1d76a")
                   .attr('height', yScale.bandwidth());
             d3.select("svg")
                   .append("g")                  
@@ -481,7 +504,7 @@
                     }                 
                   })
                   .style("stroke", "white")
-                  .style("opacity", 0.85)
+                  .style("opacity", 1)
                   .style("stroke-width", 1);
                 div.transition()
                     .duration(50)
@@ -497,7 +520,7 @@
             d3.select(this).transition()
                   .duration('50')
                   .style("opacity",.85)
-                  .style("fill","black")
+                  .style("fill","#fec44f")
                   .attr('height', yScale.bandwidth()/1.5);
             d3.select("svg")
                   .append("g")                  
@@ -554,7 +577,7 @@
 
       /*SVG2 - BarChart for Top 10 Lowest Countries Vandana */
       
-      const widthlow = 520;
+      const widthlow = 550;
       const heightlow = 200;
       //d3.select('svg1').remove();
       const svglow = d3
@@ -562,7 +585,7 @@
             .append("svg")
             .attr("width", widthlow)
             .attr("height", heightlow)
-            .style("background", "#666666")
+            .style("background", "white")
             ;
       barchartlow();
       //Barchart - Vandana
@@ -583,7 +606,7 @@
           const yValue = d => d.Country;
           //const xValue = d => d.Country;//'GDP - per capita'];
           //const yValue = d => d[topic];
-          const marginlow = { top: 50, right: 40, bottom: 50, left: 100 };
+          const marginlow = { top: 50, right: 30, bottom: 50, left: 130 };
           const innerWidthlow = widthlow - marginlow.left - marginlow.right;
           const innerHeightlow = heightlow - marginlow.top - marginlow.bottom;
           
@@ -625,7 +648,7 @@
               .attr('class', 'axis-label')
               .attr('y', 30)
               .attr('x', innerWidthlow / 2)
-              .attr('fill', 'white')
+              .attr('fill', 'black')
               .text(xAxisLabelText)
               ;
             
@@ -647,7 +670,7 @@
               .attr('class', 'title')
               .attr('y', -10)
               .text(titleText)
-              .attr('fill','white');
+              .attr('fill','black');
 
           g.selectAll('rect')
                 .on('mouseover',mouseoverbarchartlow)
@@ -658,7 +681,7 @@
             d3.select(this).transition()
                   .duration('50')
                   .style("opacity", ".8")                  
-                  .style("fill", "Red")
+                  .style("fill", "#a1d76a")
                   .attr('height', yScale.bandwidth());
             d3.select("svg")
                   .append("g")                  
@@ -691,7 +714,7 @@
             d3.select(this).transition()
                   .duration('50')
                   .style("opacity", 0.9)
-                  .style("fill","black")
+                  .style("fill","#fec44f")
                   .attr('height', yScale.bandwidth()/1.5);
             d3.select("svg")
                   .append("g")                  
@@ -759,7 +782,7 @@
             .append("svg")
             .attr("width", width_bubble)
             .attr("height", height_bubble)
-            .style("background", "#666666")
+            .style("background", "white")
             ;
 
     // -1- Create a tooltip div that is hidden by default:
@@ -900,6 +923,24 @@
           tooltip
             .transition()
             .duration(200)
+          d3.select("svg")
+                  .append("g")                  
+                  .selectAll("path")
+                  .data(world.features)
+                  .enter()
+                  .append("path")
+                  .attr("d", path)                  
+                  .style("fill", function(f){
+                    if(f.properties.name === d["Country"]){
+                      console.log(topic);
+                      return "indigo";
+                    }else{
+                      return "grey";
+                    }                 
+                  })
+                  .style("stroke", "white")
+                  .style("opacity", 1)
+                  .style("stroke-width", 1);
           var tooltipText = 'Country: ' + d['Country'] + '<br>';
           tooltipText += topic + ': ' + d[topic] + '<br>';
           tooltipText += yAxisParam + ': ' + d[yAxisParam] + '<br>' + '<br>';
@@ -932,12 +973,12 @@
           // reduce opacity of all groups
           d3.selectAll(".bubbles").style("opacity", 0.15)
           // expect the one that is hovered
-          d3.selectAll("."+getCountrySlug(d.Country)).style("opacity", 0.9).style('fill', '#ffa500');
+          d3.selectAll("."+getCountrySlug(d.Country)).style("opacity", 0.9).style('fill', 'indigo');
         }
 
         // And when it is not hovered anymore
         var noHighlight = function(d){
-          d3.selectAll(".bubbles").style("opacity", 0.3).style('fill', 'indigo');
+          d3.selectAll(".bubbles").style("opacity", 0.3).style('fill', '#e60e4f');
         }
 
           svg.selectAll('circle').data(data)
@@ -970,10 +1011,10 @@
             } )
             .attr("cy", function (d) { return y(yValue(d)); } )
             .attr("r", function (d) { return z(xValue(d)); } )
-            .style("fill", "indigo")
+            .style("fill", "#e60e4f")
             .style("opacity", "0.7")
             .attr("stroke", "black")
-            .attr("stroke-width", "0.2")
+            .attr("stroke-width", "0.5")
             //.style("fill", function (d) { return myColor(d['Population']); } )
           // -3- Trigger the functions for hover
           .on("mouseover", showTooltip )

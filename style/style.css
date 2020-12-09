@@ -1,12 +1,15 @@
 body {
-  background-color:#333333;
-  margin: 10px;
+
+
+background-color:white;
+margin: 10px;
+
 }
 
 .hbar {
-  color :black;
+  color :white;
   padding-top: 0.1px;
-  font-size: 15px;
+  font-size: 15.5px;
   font-weight: bold;
   padding-left: 9px;
   background: #0088cc;
@@ -16,7 +19,7 @@ body {
     padding-right: 10px;
     font-size: 13px;
     font-weight: bold;
-    color: black;
+    color: white;
     padding: 8px 10px;
     text-align: center;
     padding-right: 25px;
@@ -25,9 +28,53 @@ body {
     height: 15px;
 }
 
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tabbutton {
+  background-color: #aa42f5;
+  font-family: Arial;
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  /*padding-top: -50px;*/
+  /*padding-top: 10px;*/
+  padding-bottom: -5px;
+  padding-right: 14px;
+}
+
+/* Change background color of buttons on hover */
+.tabbutton:hover {
+  background-color: darkgray;
+  opacity: 0.6;
+}
+
+/* Create an active/current tablink class */
+.tabbutton.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
 .names {
   fill: none;
   stroke: #fff;
+  font-family: Arial;
   stroke-linejoin: round;
 }
 
@@ -35,7 +82,7 @@ body {
 .d3-tip {
   line-height: 1.5;
   font-weight: 400;
-  font-family: "avenir next", Arial, sans-serif;
+  font-family: Arial;
   padding: 6px;
   background: rgba(0, 0, 0, 0.6);
   color: #ffa500;
@@ -81,24 +128,31 @@ label{
 }
 
 .barrect {
-  fill: black;
+  fill: #e6550d;
   opacity: 0.85;
-  
-}
-rect {
-  fill:#333333;
-  background-color: #333333; 
-  
 }
 
+  rect {
+    fill:white;
+    background-color: #333333; 
+    
+  }
+  
+  #piechart{
+    position: relative;
+    top: -325px;
+    left: 835px;
+    background-color:white;
+  }
 div.tooltip {	
   z-index: 9999;
   position: absolute;			
   text-align: center;			
   width: 150;					
   height: 46px;					
-  padding: 2px;				
-  font: 12px sans-serif;		
+  padding: 2px;
+  font-family: Arial;				
+  font: 12px;		
   background: rgba(0, 0, 0, 0.6);
   color: #ffa500;	
   border: 0px;		
@@ -119,6 +173,7 @@ div.tooltip {
   cursor: pointer;
   float: right;
   font-weight: bold;
+  font-family: Arial;
 }
 
 .ResetButton:hover {
@@ -131,6 +186,7 @@ div.tooltip {
   padding: 5px 5px;
   text-align: center;     
   font-size: 12px;
+  font-family: Arial;
   margin: 4px 2px;
   transition-duration: 0.4s;
   background-color: white;
@@ -146,7 +202,8 @@ div.tooltip {
 
 button{
   padding: 5px 5px;
-  text-align: center;     
+  text-align: center;
+  font-family: Arial;    
   font-size: 12px;
   margin: 4px 2px;
   transition-duration: 0.4s;
@@ -160,7 +217,7 @@ button{
 
 button:hover {
   background-color: #4CAF50;
-  color: white;
+  color:black;
 }
 
 
@@ -179,13 +236,6 @@ button:hover {
   left: 760px;
   text-align: right;
 }*/
-
-#piechart{
-  position: relative;
-  top: -325px;
-  left: 805px;
-  background-color:"#666666"; 
-}
 
 .vl {
   border-left: 6px solid #484646;
